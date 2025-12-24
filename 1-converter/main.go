@@ -10,11 +10,12 @@ func main() {
 
 }
 
-func getCurrency(currency float64) float64 {
+func getCurrency() float64 {
+	var currency float64
 	fmt.Scan(&currency)
 	return currency
 }
 
-func getRate(currency float64, rate1 float64, rate2 float64) {
+func getRate(currency float64, rate1 string, rate2 string) {
 
 }
