@@ -66,10 +66,10 @@ func makeCalculate(opr string, nums []int) {
 	} else if opr == "MED" {
 		nums = sortNums(nums)
 		if len(nums)%2 != 0 {
-			med := (len(nums) / 2) + 1
+			med := (nums[len(nums) / 2])
 			fmt.Printf("Медианное значение: %d\n", med)
 		} else {
-			num1 := nums[len(nums)/2] - 1
+			num1 := nums[len(nums)/2 - 1]
 			num2 := nums[len(nums)/2]
 			med :=  float64(num1 + num2) / 2.0
 			fmt.Printf("Медианное значение: %v\n", med)
