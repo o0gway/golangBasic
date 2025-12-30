@@ -3,7 +3,11 @@ package main
 import "fmt"
 
 
-var rateMaps map[string]float64 = map[string]float64{
+
+
+
+func main() {
+	var rateMaps map[string]float64 = map[string]float64{
 	"EURRUB": 93.55,
 	"USDRUB": 79.45,
 	"RUBEUR": 0.011,
@@ -11,13 +15,10 @@ var rateMaps map[string]float64 = map[string]float64{
 	"USDEUR": 0.85,
 	"EURUSD": 1.18,
 }
-
-
-func main() {
 	currency := getCurrency()
 	rate1, rate2 := getRates()
 	// if 
-	getResult(currency, rate1, rate2)
+	getResult(currency, rate1, rate2, &rateMaps)
 }
 
 func getCurrency() float64 {
@@ -58,8 +59,8 @@ func getRates() (string, string) {
 
 }
 
-func getResult(sum float64, originalRate string, targetRate string) {
-	fmt.Println(sum * rateMaps[originalRate+targetRate])
+func getResult(sum float64, originalRate string, targetRate string, currentRates *map[string]float64) {
+	fmt.Println(sum * (*currentRates)[originalRate+targetRate])
 	// if originalRate == "RUB" && targetRate == "USD" {
 	// 	fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
 	// } else if originalRate == "RUB" && targetRate == "EUR" {
