@@ -55,20 +55,20 @@ func getRates() (string, string) {
 }
 
 func getResult(sum float64, originalRate string, targetRate string) {
-
-	if originalRate == "RUB" && targetRate == "USD" {
-		fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
-	} else if originalRate == "RUB" && targetRate == "EUR" {
-		fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
-	} else if originalRate == "USD" && targetRate == "EUR" {
-		fmt.Println(sum * (rateMaps[originalRate] / rateMaps[targetRate]))
-	} else if originalRate == "EUR" && targetRate == "USD" {
-		fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
-	} else if originalRate == "USD" && targetRate == "RUB" {
-		fmt.Println(sum * rateMaps[originalRate])
-	} else if originalRate == "EUR" && targetRate == "RUB" {
-		fmt.Println(sum * rateMaps[originalRate])
-	} else {
-		fmt.Println("Нет операций для обмена")
-	}
+	fmt.Println(sum * rateMaps[originalRate] * rateMaps[targetRate])
+	// if originalRate == "RUB" && targetRate == "USD" {
+	// 	fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
+	// } else if originalRate == "RUB" && targetRate == "EUR" {
+	// 	fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
+	// } else if originalRate == "USD" && targetRate == "EUR" {
+	// 	fmt.Println(sum * (rateMaps[originalRate] / rateMaps[targetRate]))
+	// } else if originalRate == "EUR" && targetRate == "USD" {
+	// 	fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
+	// } else if originalRate == "USD" && targetRate == "RUB" {
+	// 	fmt.Println(sum * rateMaps[originalRate])
+	// } else if originalRate == "EUR" && targetRate == "RUB" {
+	// 	fmt.Println(sum * rateMaps[originalRate])
+	// } else {
+	// 	fmt.Println("Нет операций для обмена")
+	// }
 }
