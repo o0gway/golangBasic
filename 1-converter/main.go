@@ -2,12 +2,13 @@ package main
 
 import "fmt"
 
-const USDToEUR = 0.85
-const EURToUSD = 1.18
-const RUBToUSD = 79.88
-const RUBToEUR = 79.04 / 0.85
-const USDToRUB = 0.013
-const EURToRUB = 0.011
+
+var rateMaps map[string]float64 = map[string]float64{
+	"EUR": 93.55,
+	"USD": 79.45,
+	"RUB": 1,
+}
+
 
 func main() {
 	currency := getCurrency()
@@ -21,7 +22,7 @@ func getCurrency() float64 {
 		fmt.Print("Пожалуйста введите сумму:")
 		_, err := fmt.Scan(&currency)
 		if err != nil {
-			fmt.Println("Некоретное значение")
+			fmt.Println("Некорректное значение")
 			continue
 		}
 		return currency
@@ -37,7 +38,7 @@ func getRates() (string, string) {
 		if originalRate == "RUB" || originalRate == "USD" || originalRate == "EUR" {
 			break
 		}
-		fmt.Println("Некоретное значение")
+		fmt.Println("Некорректное значение")
 
 	}
 
@@ -47,7 +48,7 @@ func getRates() (string, string) {
 		if targetRate == "RUB" || targetRate == "USD" || targetRate == "EUR" {
 			break
 		}
-		fmt.Println("Некоретное значение")
+		fmt.Println("Некорректное значение")
 	}
 	return originalRate, targetRate
 
@@ -56,17 +57,17 @@ func getRates() (string, string) {
 func getResult(sum float64, originalRate string, targetRate string) {
 
 	if originalRate == "RUB" && targetRate == "USD" {
-		fmt.Println(sum * RUBToUSD)
+		fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
 	} else if originalRate == "RUB" && targetRate == "EUR" {
-		fmt.Println(sum * RUBToEUR)
+		fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
 	} else if originalRate == "USD" && targetRate == "EUR" {
-		fmt.Println(sum * USDToEUR)
+		fmt.Println(sum * (rateMaps[originalRate] / rateMaps[targetRate]))
 	} else if originalRate == "EUR" && targetRate == "USD" {
-		fmt.Println(sum * EURToUSD)
+		fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
 	} else if originalRate == "USD" && targetRate == "RUB" {
-		fmt.Println(sum * USDToRUB)
+		fmt.Println(sum * rateMaps[originalRate])
 	} else if originalRate == "EUR" && targetRate == "RUB" {
-		fmt.Println(sum * EURToRUB)
+		fmt.Println(sum * rateMaps[originalRate])
 	} else {
 		fmt.Println("Нет операций для обмена")
 	}
