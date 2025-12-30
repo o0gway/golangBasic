@@ -2,17 +2,23 @@ package main
 
 import "fmt"
 
-const USDToEUR = 0.85
-const EURToUSD = 1.18
-const RUBToUSD = 79.88
-const RUBToEUR = 79.04 / 0.85
-const USDToRUB = 0.013
-const EURToRUB = 0.011
+
+
+
 
 func main() {
+	var rateMaps map[string]float64 = map[string]float64{
+	"EURRUB": 93.55,
+	"USDRUB": 79.45,
+	"RUBEUR": 0.011,
+	"RUBUSD": 0.012,
+	"USDEUR": 0.85,
+	"EURUSD": 1.18,
+}
 	currency := getCurrency()
 	rate1, rate2 := getRates()
-	getResult(currency, rate1, rate2)
+	// if 
+	getResult(currency, rate1, rate2, &rateMaps)
 }
 
 func getCurrency() float64 {
@@ -21,7 +27,7 @@ func getCurrency() float64 {
 		fmt.Print("Пожалуйста введите сумму:")
 		_, err := fmt.Scan(&currency)
 		if err != nil {
-			fmt.Println("Некоретное значение")
+			fmt.Println("Некорректное значение")
 			continue
 		}
 		return currency
@@ -37,7 +43,7 @@ func getRates() (string, string) {
 		if originalRate == "RUB" || originalRate == "USD" || originalRate == "EUR" {
 			break
 		}
-		fmt.Println("Некоретное значение")
+		fmt.Println("Некорректное значение")
 
 	}
 
@@ -47,27 +53,27 @@ func getRates() (string, string) {
 		if targetRate == "RUB" || targetRate == "USD" || targetRate == "EUR" {
 			break
 		}
-		fmt.Println("Некоретное значение")
+		fmt.Println("Некорректное значение")
 	}
 	return originalRate, targetRate
 
 }
 
-func getResult(sum float64, originalRate string, targetRate string) {
-
-	if originalRate == "RUB" && targetRate == "USD" {
-		fmt.Println(sum * RUBToUSD)
-	} else if originalRate == "RUB" && targetRate == "EUR" {
-		fmt.Println(sum * RUBToEUR)
-	} else if originalRate == "USD" && targetRate == "EUR" {
-		fmt.Println(sum * USDToEUR)
-	} else if originalRate == "EUR" && targetRate == "USD" {
-		fmt.Println(sum * EURToUSD)
-	} else if originalRate == "USD" && targetRate == "RUB" {
-		fmt.Println(sum * USDToRUB)
-	} else if originalRate == "EUR" && targetRate == "RUB" {
-		fmt.Println(sum * EURToRUB)
-	} else {
-		fmt.Println("Нет операций для обмена")
-	}
+func getResult(sum float64, originalRate string, targetRate string, currentRates *map[string]float64) {
+	fmt.Println(sum * (*currentRates)[originalRate+targetRate])
+	// if originalRate == "RUB" && targetRate == "USD" {
+	// 	fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
+	// } else if originalRate == "RUB" && targetRate == "EUR" {
+	// 	fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
+	// } else if originalRate == "USD" && targetRate == "EUR" {
+	// 	fmt.Println(sum * (rateMaps[originalRate] / rateMaps[targetRate]))
+	// } else if originalRate == "EUR" && targetRate == "USD" {
+	// 	fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
+	// } else if originalRate == "USD" && targetRate == "RUB" {
+	// 	fmt.Println(sum * rateMaps[originalRate])
+	// } else if originalRate == "EUR" && targetRate == "RUB" {
+	// 	fmt.Println(sum * rateMaps[originalRate])
+	// } else {
+	// 	fmt.Println("Нет операций для обмена")
+	// }
 }
