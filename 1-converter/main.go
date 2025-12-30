@@ -4,15 +4,19 @@ import "fmt"
 
 
 var rateMaps map[string]float64 = map[string]float64{
-	"EUR": 93.55,
-	"USD": 79.45,
-	"RUB": 1,
+	"EURRUB": 93.55,
+	"USDRUB": 79.45,
+	"RUBEUR": 0.011,
+	"RUBUSD": 0.012,
+	"USDEUR": 0.85,
+	"EURUSD": 1.18,
 }
 
 
 func main() {
 	currency := getCurrency()
 	rate1, rate2 := getRates()
+	// if 
 	getResult(currency, rate1, rate2)
 }
 
@@ -55,7 +59,7 @@ func getRates() (string, string) {
 }
 
 func getResult(sum float64, originalRate string, targetRate string) {
-	fmt.Println(sum * rateMaps[originalRate] * rateMaps[targetRate])
+	fmt.Println(sum * rateMaps[originalRate+targetRate])
 	// if originalRate == "RUB" && targetRate == "USD" {
 	// 	fmt.Println(sum * (rateMaps[targetRate] / rateMaps[originalRate]))
 	// } else if originalRate == "RUB" && targetRate == "EUR" {
